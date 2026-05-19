@@ -112,7 +112,7 @@ export class PropertyService {
     },
     {
       propertyId: 8,
-      propertyName: 'House 1',
+      propertyName: 'Bed 1',
       category: 'Apartment',
       rating: 2,
       img: './assets/img/home-img.png',
