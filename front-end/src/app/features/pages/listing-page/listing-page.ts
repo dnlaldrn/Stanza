@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, ChangeDetectionStrategy, computed } from '@angular/core';
+import { Component, inject, OnInit, ChangeDetectionStrategy, computed , signal} from '@angular/core';
 import { PropertyService, Property } from '../../../core/services/property-service/property-service';
 import { CardComponent } from '../../../shared/components/card-component/card-component';
 import {InputSearchComponent} from '../../../shared/components/input-search-component/input-search-component'
@@ -13,30 +13,15 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './listing-page.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ListingPage  {
+export class ListingPage implements OnInit  {
 
-  searchText = "";
-  products: Property[] = [];
-  filteredProperty: Property[] = [];
 
   private readonly propertyService = inject(PropertyService);
+  public readonly properties = this.propertyService.allProperties;
 
-
-  applySearch(searchText:string){
-    const value = this.searchText.trim();
-
-    if(value == ''){
-      this.filteredProperty = this.propertyService.getAllProperty()
-    }
-    else{
-      this.filteredProperty = this.propertyService.getPropertiesByCategory()
-    }
-
-  }
-
-
-
- 
-
- 
+  ngOnInit() {
+   return this.propertyService.getAllProperty()
 }
+}
+
+
