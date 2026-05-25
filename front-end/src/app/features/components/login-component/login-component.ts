@@ -1,46 +1,50 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { RouterLink, Router } from '@angular/router';
+import { Component, inject } from '@angular/core';
+
+import { FormBuilder, Validators, ReactiveFormsModule } from '@angular/forms';
+
+import { RouterLink } from '@angular/router';
+
+import { AuthService } from '../../../core/auth/auth.service';
 
 @Component({
   selector: 'app-login-component',
-  standalone: true, // Ensure standalone is true if you're not using NgModules
-  imports: [CommonModule, ReactiveFormsModule, RouterLink],
+
+  standalone: true,
+
+  imports: [ReactiveFormsModule, RouterLink],
+
   templateUrl: './login-component.html',
 })
 export class LoginComponent {
-  loginForm: FormGroup;
+  private fb = inject(FormBuilder);
 
-  // Mock Credentials
-  private readonly validEmail = 'daniel@gmail.com';
-  private readonly validPassword = 'daniel24';
+  private auth = inject(AuthService);
 
-  constructor(private fb: FormBuilder, public router: Router) {
-    this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
-    }, { 
-      // We bind 'this' so the validator can see validEmail/validPassword
-      validators: this.credentialsValidator.bind(this) 
-    });
-  }
+  loading = false;
 
-  credentialsValidator(g: FormGroup) {
-    const email = g.get('email')?.value;
-    const password = g.get('password')?.value;
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
 
-    return (email === this.validEmail && password === this.validPassword)
-      ? null 
-      : { identityMismatch: true };
-  }
+    password: ['', Validators.required],
+  });
 
-  onSubmit() {
-    if (this.loginForm.valid) {
-      this.router.navigate(['/']);
-    } else {
-      // Mark all as touched so the user sees red borders/messages
+  async onSubmit() {
+    if (this.loginForm.invalid) {
       this.loginForm.markAllAsTouched();
+
+      return;
+    }
+
+    try {
+      this.loading = true;
+
+      const { email, password } = this.loginForm.getRawValue();
+
+      await this.auth.login(email!, password!);
+    } catch (error: any) {
+      alert(error.message);
+    } finally {
+      this.loading = false;
     }
   }
 }
