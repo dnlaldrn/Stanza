@@ -1,121 +1,310 @@
-# Stanza - Dorm & Apartment Listing Platform
+# 🏠 Stanza - Dorm & Apartment Listing Platform
 
-**Stanza** is a comprehensive platform designed to bridge the gap between dorm owners and students. It streamlines the process of listing properties, searching for affordable housing, and managing reservations in a secure, modern environment.
+<div align="center">
 
----
+![Angular](https://img.shields.io/badge/Angular-v20+-DD0031?logo=angular&logoColor=white)
+![TailwindCSS](https://img.shields.io/badge/TailwindCSS-38B2AC?logo=tailwindcss&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?logo=supabase&logoColor=white)
+![Prettier](https://img.shields.io/badge/Prettier-F7B93E?logo=prettier&logoColor=black)
+![Vercel](https://img.shields.io/badge/Vercel-000000?logo=vercel&logoColor=white)
 
-## 🏗️ 1. System Overview
-
-### User Roles
-*   **Students:** Search, filter, and book dorms tailored to their needs.
-*   **Dorm Owners:** List and manage properties, amenities, and booking requests.
-*   **Admins:** Oversee listings, moderate users, and generate platform reports.
-
-### Core Features
-*   **Secure Authentication:** JWT-based login and registration.
-*   **Property Management:** Full CRUD operations for dorm listings.
-*   **Smart Search:** Advanced filtering by price, location, and specific amenities.
-*   **Reservation System:** Real-time booking and approval workflow.
-*   **Social Proof:** Integrated reviews and rating system.
-*   **Cloud Media:** High-quality image uploads and management.
-*   **Management Suite:** Dedicated Admin and Owner dashboards.
+</div>
 
 ---
 
-## ⚙️ 2. High-Level Architecture
+## 📌 Overview
 
-The platform utilizes a modern MERN-like stack with an Angular twist for a highly reactive frontend.
+**Stanza** is a dorm and apartment listing platform built to connect **students** with **property owners** through a secure and modern housing marketplace.
 
-*   **Frontend:** Angular (Standalone Components, Signals)
-*   **Backend:** Node.js + Express API
-*   **Database:** MongoDB (Atlas)
-*   **Cloud Storage:** Cloudinary / AWS S3 for property images
+Students can search listings, compare amenities, and reserve temporary accommodations, while property owners can manage listings, availability, and reservations efficiently.
 
-**Style:** RESTful API, Modular Backend, and Component-driven Frontend.
+The platform follows a **modern Angular + Supabase architecture**, emphasizing scalability, performance, and developer productivity.
 
 ---
 
-## 🧠 3. Backend Architecture (Node + Express)
+## 🛠 Tech Stack
 
-### Folder Structure
+### Frontend
+- Angular v20+
+- Standalone Components
+- Angular Signals
+- TailwindCSS
+- Reactive Forms
+
+### Backend / Infrastructure
+- Supabase Authentication
+- Supabase PostgreSQL Database
+- Supabase Storage
+- Row Level Security (RLS)
+- REST API via Supabase Client
+
+### Deployment
+- Vercel
+
+### Development Tools
+- Prettier
+- ESLint
+- GitHub Actions
+
+---
+
+## 👥 User Roles
+
+### 🎓 Student
+- Search dorms and apartments
+- Filter by location, amenities, and budget
+- View ratings and reviews
+- Reserve accommodations
+- Manage profile information
+
+### 🏠 Property Owner
+- Create property listings
+- Upload dorm images
+- Manage reservations
+- Update availability
+- Monitor listing performance
+
+### 🛡 Administrator
+- Moderate platform activity
+- Verify listings
+- Manage users
+- Generate reports
+
+---
+
+## ✨ Core Features
+
+### 🔐 Authentication
+- Secure registration and login
+- Email verification
+- Session persistence
+- Role-based access
+
+### 🏘 Property Management
+- Create listings
+- Update property details
+- Delete listings
+- Image uploads
+
+### 🔍 Smart Search
+- Search by location
+- Category filtering
+- Price filtering
+- Amenity filtering
+
+### 📅 Reservation System
+- Reservation requests
+- Approval workflow
+- Reservation tracking
+
+### ⭐ Reviews & Ratings
+- Property feedback
+- Community ratings
+
+### 👤 Profile System
+- Generated profile avatars
+- User metadata
+- Role management
+
+---
+
+# 🏗 System Architecture
+
 ```text
-server/
-├── src/
-│   ├── config/          # DB connection & environment variables
-│   ├── modules/         # Feature-based logic (Auth, Users, Dorms, etc.)
-│   ├── middleware/      # Auth & Error handling
-│   ├── services/        # Third-party integrations (Upload, Email)
-│   ├── utils/           # Validation logic
-│   ├── app.js           # App configuration
-│   └── server.js        # Entry point
-└── tests/               # Unit and Integration tests
+Angular Frontend
+       │
+Angular Signals
+       │
+Supabase Client
+       │
+────────────────────
+ Supabase Platform
+────────────────────
+│ Authentication    │
+│ PostgreSQL DB     │
+│ Storage Bucket    │
+│ Row Level Security│
+────────────────────
 ```
 
-### Database Schema (MongoDB)
-*   **User:** Name, Email, Password, Role (`student`, `owner`, `admin`).
-*   **Dorm:** Title, Description, Price, Location (GeoJSON), Amenities, Images.
-*   **Booking:** User/Dorm references, Date range, Status.
-*   **Review:** User/Dorm references, 1-5 Rating, Comments.
-
 ---
 
-## 🎨 4. Frontend Architecture (Angular v20+)
+# 📁 Frontend Architecture
 
-Following modern Angular best practices, the client uses **Standalone Components** and **Signals** for efficient state management.
-
-### Folder Structure
 ```text
 src/app/
-├── core/                # Singleton services (Auth, API, Config)
-├── shared/              # Reusable UI Atoms, Pipes, Directives, Models
-├── features/            # Lazy-loaded business modules (Dashboard, Auth)
-├── layout/              # UI Shells (Navbar, Sidebar, Footer)
-├── app.routes.ts        # Main routing configuration
-└── app.config.ts        # Global providers (Signals, Routing)
+
+├── core/
+│   ├── auth/
+│   ├── api/
+│   └── config/
+│
+├── shared/
+│   ├── components/
+│   ├── pipes/
+│   ├── directives/
+│   └── models/
+│
+├── features/
+│   ├── auth/
+│   ├── property/
+│   ├── dashboard/
+│   └── profile/
+│
+├── layout/
+│   ├── main-layout/
+│   └── auth-layout/
+│
+├── app.routes.ts
+└── app.config.ts
 ```
 
-### Key Technical Features
-*   **Lazy Loading:** Optimized bundle sizes for faster initial loads.
-*   **Reactive Forms:** Robust input handling and validation.
-*   **Signals:** Fine-grained reactivity for state management.
-*   **Functional Interceptors:** Streamlined JWT injection for API calls.
+---
+
+# 🗄 Database Schema (Supabase PostgreSQL)
+
+## Users
+
+```sql
+id uuid primary key
+email text
+full_name text
+role text
+created_at timestamp
+```
 
 ---
 
-## 🔌 5. API Design (Sample Endpoints)
+## Properties
 
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `POST` | `/api/auth/register` | Create a new account |
-| `GET` | `/api/dorms` | Fetch all available listings |
-| `POST` | `/api/bookings` | Request a reservation |
-| `PUT` | `/api/bookings/:id/status`| Approve/Reject a booking |
+```sql
+property_id bigint
+property_name text
+category text
+address text
+rating integer
+price numeric
+
+electricity boolean
+water boolean
+internet boolean
+airconditioned boolean
+
+owner_id uuid
+
+created_at timestamp
+```
 
 ---
 
-## ☁️ 6. Infrastructure & DevOps
+## Reservations
 
-*   **Hosting:** Vercel (Frontend), Railway/Render (Backend).
-*   **CI/CD:** Automated deployments via **GitHub Actions**.
-*   **Security:** 
-    *   Bcrypt password hashing.
-    *   Rate limiting & Helmet.js protection.
-    *   Input validation via Zod/Joi.
+```sql
+reservation_id bigint
+student_id uuid
+property_id bigint
+
+status text
+
+created_at timestamp
+```
 
 ---
 
-## 🚀 10. Development Roadmap
+## Reviews
 
-### Phase 1: MVP (Minimum Viable Product)
-- [ ] User Authentication & Profiles
-- [ ] Basic Dorm Listings (CRUD)
-- [ ] Search & Filter functionality
+```sql
+review_id bigint
 
-### Phase 2: Core Experience
-- [ ] Review & Rating System
-- [ ] Automated Email Notifications
+user_id uuid
+property_id bigint
 
-### Phase 3: Advanced Features
-- [ ] Admin Dashboard & Analytics
-- [ ] Image Uploads (Cloudinary Integration)
-- [ ] Google Maps Geolocation Integration
+rating integer
+comment text
+
+created_at timestamp
+```
+
+---
+
+# 🔒 Security
+
+### Authentication
+- Supabase Auth
+- JWT Sessions
+- Protected Routes
+- Auth Guards
+
+### Database Security
+- Row Level Security (RLS)
+- Policy-based access control
+
+### Frontend Security
+- Environment variables
+- Route Guards
+- Validation via Reactive Forms
+
+---
+
+# 🚀 Deployment
+
+### Frontend
+
+Vercel
+
+### Backend Services
+
+Supabase Cloud
+
+---
+
+# 📈 Development Roadmap
+
+## Phase 1 — MVP
+
+- [x] Authentication
+- [x] User Profiles
+- [ ] Property CRUD
+- [x] Search & Filters
+
+---
+
+## Phase 2 — Core Experience
+
+- [ ] Reservation Workflow
+- [ ] Reviews & Ratings
+- [ ] Property Owner Dashboard
+
+---
+
+## Phase 3 — Advanced Features
+
+- [ ] Analytics Dashboard
+- [ ] Maps Integration
+- [ ] Image Optimization
+- [ ] Notification System
+
+---
+
+# 🧑‍💻 Development Principles
+
+- Feature-based architecture
+- Lazy loading
+- Standalone components
+- Angular Signals
+- Reactive programming
+- Scalable folder structure
+
+---
+
+## 📄 License
+
+MIT License
+
+---
+
+<div align="center">
+
+Built with ❤️ using Angular + Supabase
+
+</div>
