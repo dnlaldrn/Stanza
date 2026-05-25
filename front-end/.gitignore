@@ -23,7 +23,6 @@ yarn-error.log
 # Ignore environment secrets
 .env
 src/environments/environment.ts
-src/environments/environment.prod.ts
 
 # Visual Studio Code
 .vscode/*
