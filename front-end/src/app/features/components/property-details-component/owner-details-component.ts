@@ -1,5 +1,5 @@
 import { Component, inject, input, computed } from '@angular/core';
-import { PropertyService } from '../../../core/services/property-service/property-service';
+import { PropertyService } from '../../../features/services/property-service/property-service';
 
 @Component({
   selector: 'app-property-details-component',

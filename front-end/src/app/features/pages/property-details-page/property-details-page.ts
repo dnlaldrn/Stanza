@@ -1,7 +1,7 @@
 import { Component, inject,signal,computed, input } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PropertyDetailsComponent } from '../../components/property-details-component/owner-details-component';
-import { PropertyService } from '../../../core/services/property-service/property-service';
+import { PropertyService } from '../../services/property-service/property-service';
 import { CurrencyPipe } from '@angular/common';
 import {RatingComponent} from '../../components/rating-component/rating-component'
 import {CardComponent} from '../../../shared/components/card-component/card-component'
@@ -35,7 +35,7 @@ export class PropertyDetailsPage {
       return [];
     }
     // Fetch properties with the same category and exclude the current one
-    return this.propertyService.getPropertiesByCategory(currentProperty.category).filter(p => p.propertyId !== currentProperty.propertyId);
+    return this.propertyService.getPropertiesByCategory(currentProperty.category).filter(p => p.property_id !== currentProperty.property_id);
   });
   
 

@@ -1,5 +1,5 @@
 <section class="">
-  <nav class=" bg-white rounded-lg shadow-sm border border-gray-200">
+  <nav class="bg-white rounded-lg shadow-sm border border-gray-200">
     <ul class="flex flex-col md:justify-between md:flex-row items-center">
       <!-- Logo -->
       <li class="flex justify-start md:justify-start items-center">
@@ -7,44 +7,69 @@
       </li>
 
       <!-- Menu -->
-      <li class="flex flex-wrap w-full md:w-auto justify-evenly h-10 items-center  md:gap-8 backdrop-blur-2xl rounded-2xl md:px-10 "
+      <li
+        class="flex flex-wrap w-full md:w-auto justify-evenly h-10 items-center md:gap-8 backdrop-blur-2xl rounded-2xl md:px-10"
       >
         <div class="flex">
-          <a
-            class="text-black  gap-2 flex"
-            routerLink="/about"
-          ><img src="/assets/light-mode-icons/light-about.svg" />
+          <a class="text-black gap-2 flex" routerLink="/about"
+            ><img src="/assets/light-mode-icons/light-about.svg" />
             <p class="hidden md:inline-block">About</p></a
           >
         </div>
         <div class="flex">
-          <a
-            class="text-black gap-2 flex"
-            routerLink="/listing"
-            ><img src="/assets/light-mode-icons/light-listing.svg" class="" /><p class="hidden md:inline-block">Listing</p></a
+          <a class="text-black gap-2 flex" routerLink="/listing"
+            ><img src="/assets/light-mode-icons/light-listing.svg" class="" />
+            <p class="hidden md:inline-block">Listing</p></a
           >
         </div>
         <div class="flex">
-          <a
-            class="text-black gap-2 flex"
-            routerLink="/feedback"
-            ><img src="/assets/light-mode-icons/light-feedback.svg" /><p class="hidden md:inline-block "> Feedback</p></a
+          <a class="text-black gap-2 flex" routerLink="/feedback"
+            ><img src="/assets/light-mode-icons/light-feedback.svg" />
+            <p class="hidden md:inline-block">Feedback</p></a
           >
         </div>
         <div class="flex">
-          <a
-            class="text-black  flex gap-2"
-            routerLink="/donation"
-            ><img src="/assets/light-mode-icons/light-donation.svg" /><p class="hidden md:inline-block">Donation</p></a
+          <a class="text-black flex gap-2" routerLink="/donation"
+            ><img src="/assets/light-mode-icons/light-donation.svg" />
+            <p class="hidden md:inline-block">Donation</p></a
           >
         </div>
 
-        <div class="flex">
-          <a
-            class="text-white  flex gap-2 border px-4 py-1 rounded-sm bg-black"
-            routerLink="/login"
-            >Log in</a
-          >
+        <div class="flex ">
+          <div class="relative ">
+            @if (auth.currentUser()) {
+              <button
+                (click)="toggleMenu()"
+                class="w-10 h-10 rounded-full bg-gray-700 text-white font-bold flex items-center justify-center hover:bg-black transition"
+              >
+                {{ auth.initials() }}
+              </button>
+            }@else{
+              <a routerLink="/login" class="bg-black text-white px-3 py-1 rounded-2xl">Login</a>
+            }
+
+            @if (open()) {
+              <div
+                class="absolute right-0 mt-2 w-56 bg-gray-400 rounded-xl shadow-lg overflow-visible z-999"
+              >
+                <div class="px-4 py-3 border-b">
+                  <p class="font-semibold">
+                    {{ auth.fullName() }}
+                  </p>
+                </div>
+
+                <a routerLink="/profile" class="block px-4 py-2 hover:bg-gray-100">
+                  View Profile
+                </a>
+
+                <button
+                  class="w-full text-left text-black px-4 py-2  hover:bg-gray-100"
+                  (click)="auth.logout()">
+                 {{auth.loading ? 'Logging Out': 'Log Out'}}
+              </button>
+              </div>
+            }
+          </div>
         </div>
       </li>
     </ul>

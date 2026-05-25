@@ -1,6 +1,6 @@
 import { Component, input ,OnInit} from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
-import {PropertyService,Property} from '../../../core/services/property-service/property-service'
+import {PropertyService,Property} from '../../../features/services/property-service/property-service';
 
 
 

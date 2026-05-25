@@ -2,10 +2,10 @@
   class="card p-3 shadow-lg rounded-2xl transition-all duration-300 ease-in-out hover:scale-98 hover:shadow-xl"
 >
   <!-- Use property binding [src] to show the actual image -->
-  <img [src]="properties().img" alt="Property Image" class="w-full h-auto" />
+  <img [src]="properties().img" alt="Property Image" class="w-full h-auto z-0" />
   <div class="flex justify-between items-end px-2">
     <div>
-      <p>{{ properties().propertyName }} - {{ properties().category }}</p>
+      <p>{{ properties().property_name }} - {{ properties().category }}</p>
 
       <p class="">{{ properties().address }}</p>
 

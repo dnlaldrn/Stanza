@@ -1,5 +1,5 @@
 import { Component, inject, OnInit, ChangeDetectionStrategy, computed , signal} from '@angular/core';
-import { PropertyService, Property } from '../../../core/services/property-service/property-service';
+import { PropertyService, Property } from '../../services/property-service/property-service';
 import { CardComponent } from '../../../shared/components/card-component/card-component';
 import {InputSearchComponent} from '../../../shared/components/input-search-component/input-search-component'
 import { RouterLink } from '@angular/router';

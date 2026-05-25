@@ -4,7 +4,7 @@ import {CategoryCardComponent} from '../../../shared/components/category-card-co
 import {CardComponent} from '../../../shared/components/card-component/card-component'
 import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { PropertyService } from '../../../core/services/property-service/property-service';
+import { PropertyService } from '../../services/property-service/property-service';
 
 
 @Component({

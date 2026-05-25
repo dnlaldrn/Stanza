@@ -2,7 +2,7 @@
   <div class="container grid grid-cols-1 lg:grid-cols-4 gap-2 px-4 md:px-10 lg:px-20 leading-loose">
     <nav aria-label="Breadcrumb" class="flex gap-2 text-sm text-blue-600 col-span-4">
       <a routerLink="/">Home</a> / <a routerLink="/listing">Listing</a> /
-      <span class="text-gray-400">{{ property()?.propertyName }}</span>
+      <span class="text-gray-400">{{ property()?.property_name }}</span>
     </nav>
 
     @if (property(); as data) {
@@ -13,12 +13,12 @@
           <!-- Using NgOptimizedImage would be even better here! -->
           <img
             [src]="data.img"
-            [alt]="data.propertyName"
+            [alt]="data.property_name"
             class="rounded-xl w-full object-cover h-96"
           />
         </div>
         <div class="mt-5">
-          <p class="text-xl font-bold md:text-2xl">{{ data.propertyName }}</p>
+          <p class="text-xl font-bold md:text-2xl">{{ data.property_name }}</p>
           <p>{{ data.address }}</p>
           <div class="flex justify-start items-center gap-2">
             <div>
