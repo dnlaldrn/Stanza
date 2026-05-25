@@ -8,16 +8,17 @@ import { ListingPage } from './features/pages/listing-page/listing-page';
 import { FeedbackPage } from './features/pages/feedback-page/feedback-page';
 import { PropertyDetailsPage } from './features/pages/property-details-page/property-details-page';
 import { PropertyDetailsComponent } from './features/components/property-details-component/owner-details-component';
+import { authGuard } from './core/auth/auth.guard';
 
 export const routes: Routes = [
-  { path: '', component: HomePage },
+  { path: '',  component: HomePage },
   { path: 'about', component: AboutPage },
   { path: 'login', component: LoginPage },
   { path: 'sign-up', component: SignUpPage },
   { path: 'donation', component: DonationPage },
-  { path: 'listing', component: ListingPage },
+  { path: 'listing', canActivate:[authGuard], component: ListingPage },
   { path: 'feedback', component: FeedbackPage },
-  { path: 'property/:propertyId', component: PropertyDetailsPage,
+  { path: 'property/:propertyId', canActivate:[authGuard], component: PropertyDetailsPage,
    
   },
 ];
