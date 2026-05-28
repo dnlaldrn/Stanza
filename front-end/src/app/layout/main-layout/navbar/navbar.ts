@@ -11,9 +11,20 @@ import { AuthService } from '../../../core/auth/auth.service';
 })
 export class Navbar {
   
-  auth = inject(AuthService);
+ public auth = inject(AuthService);
   open = signal(false);
   toggleMenu() {
     this.open.update((value) => !value);
   }
+
+   async ngOnInit() {
+    await this.auth.init();
+  }
+  async logout() {
+    this.open.set(false);
+  await this.auth.logout();
+  console.log("logging out")
+}
+
+   
 }

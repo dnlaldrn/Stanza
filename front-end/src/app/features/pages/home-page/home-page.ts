@@ -1,10 +1,11 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject , computed} from '@angular/core';
 import {HeroSectionComponent} from '../../components/hero-section-component/hero-section-component'
 import {CategoryCardComponent} from '../../../shared/components/category-card-component/category-card-component'
 import {CardComponent} from '../../../shared/components/card-component/card-component'
 import { RouterLink, Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { PropertyService } from '../../services/property-service/property-service';
+import { AuthService } from '../../../core/auth/auth.service';
 
 
 @Component({
@@ -15,10 +16,13 @@ import { PropertyService } from '../../services/property-service/property-servic
 })
 export class HomePage {
   private readonly propertyService = inject(PropertyService);
+   auth = inject(AuthService)
   
     protected readonly properties = this.propertyService.allProperties;
   
     ngOnInit(): void {
       this.propertyService.getAllProperty();
     }
+
+    isLoggedIn = computed(() => !!this.auth.currentUser());
 }
