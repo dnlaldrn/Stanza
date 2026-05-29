@@ -62,6 +62,17 @@ loading = false
 
     return data;
   }
+  async init() {
+  const { data } = await supabase.auth.getSession();
+  if (data.session?.user) {
+    this.currentUser.set(data.session.user);
+  }
+
+  // keep it in sync on auth state changes
+  supabase.auth.onAuthStateChange((event, session) => {
+    this.currentUser.set(session?.user ?? null);
+  });
+}
 
   async login(email: string, password: string) {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -78,14 +89,12 @@ loading = false
     await this.router.navigate(['/listing']);
   }
   async logout() {
-   this.loading = !this.loading;
-
-    const { error } = await supabase.auth.signOut();
-    if (error) {
-      console.error(error.message);
-      return;
-    }
-    this.currentUser.set(null);
-    await this.router.navigate(['/login']);
+  const { error } = await supabase.auth.signOut();
+  if (error) {
+    console.error(error.message);
+    return;
   }
+  // onAuthStateChange will handle setting currentUser to null
+  await this.router.navigate(['/login']);
+}
 }
