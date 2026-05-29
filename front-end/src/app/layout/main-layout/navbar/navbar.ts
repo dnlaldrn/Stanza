@@ -20,11 +20,16 @@ export class Navbar {
    async ngOnInit() {
     await this.auth.init();
   }
-  async logout() {
-    this.open.set(false);
-  await this.auth.logout();
-  console.log("logging out")
-}
 
+  loading = false;
+  async handleLogout(event: Event) {
+  console.log('logout clicked');
+
+
+  event.stopPropagation();
+
+  await this.auth.logout();
+  this.loading = true;
+}
    
 }

@@ -1,10 +1,12 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { HostListener } from '@angular/core'; 
 import { Navbar } from './navbar';
+
 
 describe('Navbar', () => {
   let component: Navbar;
   let fixture: ComponentFixture<Navbar>;
+
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
