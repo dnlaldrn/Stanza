@@ -19,21 +19,6 @@
       </div>
 
       <div>
-        <label class="block text-sm font-medium text-gray-200">Role</label>
-        <input
-          formControlName="role"
-          type="text"
-          list="roles"
-          class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
-          placeholder="(e.g.Border)"
-        />
-        <datalist id="roles">
-          <option value="Border"></option>
-          <option value="Landlord"></option>
-        </datalist>
-      </div>
-
-      <div>
         <label class="block text-sm font-medium text-gray-200">Email Address</label>
         <input
           formControlName="email"
@@ -66,8 +51,39 @@
         }
       </div>
 
-      <button class="w-full py-3 px-4 mt-4 bg-white text-blue-900 font-bold rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg active:scale-95" type="submit" [disabled]="signUpForm.invalid || loading">{{ loading? 'Creating Account...': 'Sign Up'}}</button>
-      
+      <div>
+        <label class="block text-sm font-medium text-gray-200 mb-2">Role</label>
+
+        <div class="flex gap-6">
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              formControlName="role"
+              value="Boarder"
+              class="w-4 h-4 text-blue-600 focus:ring-blue-500"
+            />
+            <span class="text-gray-200">Boarder</span>
+          </label>
+
+          <label class="flex items-center gap-2 cursor-pointer">
+            <input
+              type="radio"
+              formControlName="role"
+              value="Landlord"
+              class="w-4 h-4 text-blue-600 focus:ring-blue-500"
+            />
+            <span class="text-gray-200">Landlord</span>
+          </label>
+        </div>
+      </div>
+
+      <button
+        class="w-full py-3 px-4 mt-4 bg-white text-blue-900 font-bold rounded-lg hover:bg-gray-200 disabled:opacity-50 disabled:cursor-not-allowed transition-all shadow-lg active:scale-95"
+        type="submit"
+        [disabled]="signUpForm.invalid || loading"
+      >
+        {{ loading ? 'Creating Account...' : 'Sign Up' }}
+      </button>
     </form>
 
     <p class="text-center text-sm text-gray-300">
@@ -77,5 +93,4 @@
       >
     </p>
   </div>
-
 </div>
