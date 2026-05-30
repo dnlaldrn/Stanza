@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 })
 export class AuthService {
   currentUser = signal<any>(null);
-loading = false
+  loading = false;
   fullName = computed(() => {
     return this.currentUser()?.user_metadata?.full_name ?? '';
   });
@@ -63,16 +63,16 @@ loading = false
     return data;
   }
   async init() {
-  const { data } = await supabase.auth.getSession();
-  if (data.session?.user) {
-    this.currentUser.set(data.session.user);
-  }
+    const { data } = await supabase.auth.getSession();
+    if (data.session?.user) {
+      this.currentUser.set(data.session.user);
+    }
 
-  // keep it in sync on auth state changes
-  supabase.auth.onAuthStateChange((event, session) => {
-    this.currentUser.set(session?.user ?? null);
-  });
-}
+    // keep it in sync on auth state changes
+    supabase.auth.onAuthStateChange((event, session) => {
+      this.currentUser.set(session?.user ?? null);
+    });
+  }
 
   async login(email: string, password: string) {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -86,15 +86,21 @@ loading = false
 
     this.currentUser.set(data.user);
 
-    await this.router.navigate(['/listing']);
+    const role = this.role();
+    if (role === 'Landlord') {
+      await this.router.navigate(['/dashboard']);
+    } else {
+      // Default to listing for boarders or other roles
+      await this.router.navigate(['/listing']);
+    }
   }
   async logout() {
-  const { error } = await supabase.auth.signOut();
-  if (error) {
-    console.error(error.message);
-    return;
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error(error.message);
+      return;
+    }
+    // onAuthStateChange will handle setting currentUser to null
+    await this.router.navigate(['/login']);
   }
-  // onAuthStateChange will handle setting currentUser to null
-  await this.router.navigate(['/login']);
-}
 }
