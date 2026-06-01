@@ -13,6 +13,12 @@ export class AuthService {
     return this.currentUser()?.user_metadata?.full_name ?? '';
   });
 
+ 
+
+  email = computed(() => {
+    return this.currentUser()?.email ?? '';
+  });
+
   initials = computed(() => {
     const name = this.fullName();
 
@@ -47,9 +53,11 @@ export class AuthService {
       password,
 
       options: {
+        
         data: {
           full_name: metadata.fullName,
           role: metadata.role,
+         
         },
 
         emailRedirectTo: `${environment.appUrl}/login`,
