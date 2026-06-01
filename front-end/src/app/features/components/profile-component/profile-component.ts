@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { booleanAttribute, Component, inject } from '@angular/core';
+import {AuthService} from '../../../core/auth/auth.service'
 
 @Component({
   selector: 'app-profile-component',
@@ -6,4 +7,11 @@ import { Component } from '@angular/core';
   templateUrl: './profile-component.html',
   styleUrl: './profile-component.css',
 })
-export class ProfileComponent {}
+export class ProfileComponent {
+  isEditingPersonal = false;
+  isEditingPassword = false;
+  isEditingEmail= false;
+
+  public auth = inject(AuthService);
+}
+

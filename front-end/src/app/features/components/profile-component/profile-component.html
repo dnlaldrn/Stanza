@@ -28,32 +28,58 @@
           <h2 class="text-xl font-semibold">Personal Information</h2>
         </div>
 
-        <form class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-300">Full Name</label>
-            <input
-              type="text"
-              class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
-              placeholder="John Doe"
-            />
+        @if (!isEditingPersonal) {
+          <div class="space-y-4">
+            <div>
+              <p class="text-sm font-medium text-gray-400">Full Name</p>
+              <p class="text-lg font-semibold text-white">{{auth.fullName()}}</p>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-gray-400">Role</p>
+              <p class="text-lg font-semibold text-white">{{auth.role()}}</p>
+            </div>
+            <div>
+              
+              <p class="text-sm font-medium text-gray-400">Contact Number</p>
+              <p class="text-lg font-semibold text-white">+63 912 345 6789</p>
+            </div>
+            <button
+              type="button"
+              (click)="isEditingPersonal = true"
+              class="w-full py-3 px-4 mt-2 bg-white text-blue-900 font-bold rounded-lg hover:bg-gray-200 transition-all shadow-lg active:scale-[0.98]"
+            >
+              Update Profile
+            </button>
           </div>
-
-          <div>
-            <label class="block text-sm font-medium text-gray-300">Contact Number</label>
-            <input
-              type="tel"
-              class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
-              placeholder="+63 912 345 6789"
-            />
-          </div>
-
-          <button
-            type="submit"
-            class="w-full py-3 px-4 mt-2 bg-white text-blue-900 font-bold rounded-lg hover:bg-gray-200 transition-all shadow-lg active:scale-[0.98]"
-          >
-            Update Profile
-          </button>
-        </form>
+        } @else {
+          <form class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-300">Full Name</label>
+              <input
+                type="text"
+                class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+                placeholder="John Doe"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-medium text-gray-300">Contact Number</label>
+              <input
+                type="tel"
+                class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+                placeholder="+63 912 345 6789"
+              />
+            </div>
+            <div class="flex gap-4 mt-2">
+              <button type="button" (click)="isEditingPersonal = false" class="flex-1 py-3 px-4 bg-white/10 text-white font-bold rounded-lg border border-white/20 hover:bg-white/20 transition-all">Cancel</button>
+              <button
+                type="submit"
+                class="flex-1 py-3 px-4 bg-white text-blue-900 font-bold rounded-lg hover:bg-gray-200 transition-all shadow-lg active:scale-[0.98]"
+              >
+                Save Changes
+              </button>
+            </div>
+          </form>
+        }
       </div>
 
       <!-- Email Settings Section -->
@@ -78,26 +104,39 @@
           <h2 class="text-xl font-semibold">Change Email</h2>
         </div>
 
-        <form class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-300">New Email Address</label>
-            <input
-              type="email"
-              class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
-              placeholder="new-email@example.com"
-            />
+        @if (!isEditingEmail) {
+          <div class="space-y-4">
+            <div>
+              <p class="text-sm font-medium text-gray-400">Current Email Address</p>
+              <p class="text-lg font-semibold text-white">{{auth.email()}}</p>
+            </div>
+            <button
+              type="button"
+              (click)="isEditingEmail = true"
+              class="w-full py-3 px-4 bg-white text-blue-900 font-bold rounded-lg hover:bg-gray-200 transition-all shadow-lg active:scale-[0.98]"
+            >
+              Change Email
+            </button>
           </div>
-          <p class="text-xs text-gray-400">
-            A confirmation link will be sent to your new email address for verification.
-          </p>
-
-          <button
-            type="submit"
-            class="w-full py-3 px-4 bg-white text-blue-900 font-bold rounded-lg hover:bg-gray-200 transition-all shadow-lg active:scale-[0.98]"
-          >
-            Update Email
-          </button>
-        </form>
+        } @else {
+          <form class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-300">New Email Address</label>
+              <input
+                type="email"
+                class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+                placeholder="new-email@example.com"
+              />
+            </div>
+            <p class="text-xs text-gray-400">
+              A confirmation link will be sent to your new email address for verification.
+            </p>
+            <div class="flex gap-4">
+              <button type="button" (click)="isEditingEmail = false" class="flex-1 py-3 px-4 bg-white/10 text-white font-bold rounded-lg border border-white/20 hover:bg-white/20 transition-all">Cancel</button>
+              <button type="submit" class="flex-1 py-3 px-4 bg-white text-blue-900 font-bold rounded-lg hover:bg-gray-200 transition-all shadow-lg">Update Email</button>
+            </div>
+          </form>
+        }
       </div>
 
       <!-- Password Settings Section -->
@@ -122,23 +161,36 @@
           <h2 class="text-xl font-semibold">Security & Password</h2>
         </div>
 
-        <form class="space-y-4">
-          <div>
-            <label class="block text-sm font-medium text-gray-300">New Password</label>
-            <input
-              type="password"
-              class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
-              placeholder="••••••••"
-            />
+        @if (!isEditingPassword) {
+          <div class="space-y-4">
+            <div>
+              <p class="text-sm font-medium text-gray-400">Account Security</p>
+              <p class="text-lg font-semibold text-white">Password was last updated 3 months ago</p>
+            </div>
+            <button
+              type="button"
+              (click)="isEditingPassword = true"
+              class="w-full py-3 px-4 bg-white text-blue-900 font-bold rounded-lg hover:bg-gray-200 transition-all shadow-lg active:scale-[0.98]"
+            >
+              Update Password
+            </button>
           </div>
-
-          <button
-            type="submit"
-            class="w-full py-3 px-4 bg-white text-blue-900 font-bold rounded-lg hover:bg-gray-200 transition-all shadow-lg active:scale-[0.98]"
-          >
-            Update Password
-          </button>
-        </form>
+        } @else {
+          <form class="space-y-4">
+            <div>
+              <label class="block text-sm font-medium text-gray-300">New Password</label>
+              <input
+                type="password"
+                class="w-full mt-1 px-4 py-3 bg-white/5 border border-white/20 rounded-lg text-white focus:ring-2 focus:ring-blue-500 focus:outline-none transition-all"
+                placeholder="••••••••"
+              />
+            </div>
+            <div class="flex gap-4">
+              <button type="button" (click)="isEditingPassword = false" class="flex-1 py-3 px-4 bg-white/10 text-white font-bold rounded-lg border border-white/20 hover:bg-white/20 transition-all">Cancel</button>
+              <button type="submit" class="flex-1 py-3 px-4 bg-white text-blue-900 font-bold rounded-lg hover:bg-gray-200 transition-all shadow-lg">Save Password</button>
+            </div>
+          </form>
+        }
       </div>
     </div>
   </div>
